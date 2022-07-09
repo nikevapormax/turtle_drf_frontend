@@ -2,7 +2,8 @@ const backend_base_url = "http://127.0.0.1:8000"
 const frontend_base_url = "http://127.0.0.1:5500"
 
 
-async function handleSignin() {
+// 회원가입 // 
+async function handleSignup() {
 
     const signupData = {
         username: document.getElementById("floatingInput").value,
@@ -29,6 +30,7 @@ async function handleSignin() {
 }
 
 
+// 로그인 //
 async function handleLogin() {
     console.log("handle login")
 
@@ -70,47 +72,11 @@ async function handleLogin() {
 }
 
 
+// 로그아웃 //
 async function handleLogout() {
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
     localStorage.removeItem("payload")
     alert("로그아웃되었습니다.")
     location.reload()
-}
-
-
-async function getArticles() {
-    const response = await fetch(`${backend_base_url}/articles`, {
-        method: 'GET',
-    })
-
-    response_json = await response.json()
-    return response_json
-}
-
-
-async function postArticle() {
-    const title = document.getElementById("article_title").value
-    const content = document.getElementById("article_content").value
-    const image = document.getElementById("article_image").files[0]
-
-    const formdata = new FormData();
-
-    formdata.append('title', title)
-    formdata.append('content', content)
-    formdata.append('image', image)
-
-    const response = await fetch(`${backend_base_url}/articles/`, {
-        method: 'POST',
-        body: formdata
-    })
-
-    if (response.status == 200) {
-        alert("글작성 완료!")
-        window.location.replace(`${frontend_base_url}/`);
-    } else {
-        alert(response.status)
-    }
-
-
 }

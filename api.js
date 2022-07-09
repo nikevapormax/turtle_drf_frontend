@@ -4,7 +4,6 @@ const frontend_base_url = "http://127.0.0.1:5500"
 
 // 회원가입 // 
 async function handleSignup() {
-
     const signupData = {
         username: document.getElementById("floatingInput").value,
         password: document.getElementById('floatingPassword').value,
@@ -32,13 +31,10 @@ async function handleSignup() {
 
 // 로그인 //
 async function handleLogin() {
-    console.log("handle login")
-
     const loginData = {
         username: document.getElementById("floatingInput").value,
         password: document.getElementById('floatingPassword').value
     }
-
 
     const response = await fetch(`${backend_base_url}/user/api/token/`, {
         headers: {

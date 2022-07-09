@@ -76,3 +76,33 @@ async function handleLogout() {
     alert("로그아웃되었습니다.")
     location.reload()
 }
+
+
+// 게시글 작성 // 
+async function postArticle() {
+    const title = document.getElementById("article_title").value
+    const content = document.getElementById("article_content").value
+    const image = document.getElementById("article_image").files[0]
+
+    const formdata = new FormData();
+
+    formdata.append('title', title)
+    formdata.append('content', content)
+    formdata.append('image', image)
+
+    const response = await fetch(`${backend_base_url}/articles/`, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Authorization': 'Bearer ' + localStorage.getItem("access")
+        },
+        method: 'POST',
+        body: formdata
+    })
+
+    if (response.status == 200) {
+        alert("글작성 완료!")
+        window.location.replace(`${frontend_base_url}/`);
+    } else {
+        alert(response.status)
+    }
+}

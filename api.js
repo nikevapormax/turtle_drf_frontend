@@ -78,6 +78,18 @@ async function handleLogout() {
 }
 
 
+// 게시글 로딩 //
+async function getArticles() {
+    const articles = await fetch(`${backend_base_url}/articles`, {
+        method: 'GET',
+    })
+
+    response_json = await articles.json()
+    return response_json
+}
+
+
+
 // 게시글 작성 // 
 async function postArticle() {
     const title = document.getElementById("article_title").value
